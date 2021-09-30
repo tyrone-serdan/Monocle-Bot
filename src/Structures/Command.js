@@ -1,19 +1,19 @@
 const Discord = require("discord.js");
 
 /**
- * 
- * @param {Discord.Interaction} interaction 
+ * @param {Discord.CommandInteraction} interaction 
  */
 function runFunction(interaction) {}
 
 module.exports = class Command {
     /**
      * 
-     * @param {{name: String, description: String, run: runFunction}} options 
+     * @param {{name: String, description: String, slashCommandOptions: Discord.ApplicationCommandOption[] ,run: runFunction}} cmd 
      */
-    constructor(options) {
-        this.name = options.name;
-        this.description = options.description;
-        this.run = options.run;
+    constructor(cmd) {
+        this.name = cmd.name;
+        this.description = cmd.description;
+        this.slashCommandOptions = cmd.slashCommandOptions || [];
+        this.run = cmd.run;
     }
 }

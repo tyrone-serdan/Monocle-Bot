@@ -29,18 +29,11 @@ module.exports = class Client extends Discord.Client {
                 const command = require(`../Commands/${cmd}`);
                 console.log(`setting up ${command.name}`);
 
-                // const registerCMD = this.application?.commands;
-
-                // registerCMD.create({
-                //     name: command.name,
-                //     description: command.description,
-                // })
-
                 this.commands.set(command.name, command);
             })
     }
     /**
-     * @param {String} debugGuild if true, sets up commands only for that server, else, make commands global
+     * @param {String} debugGuild if debugGuild has value, setup commands for that server only, else, make commands global.
      */
     setupSlash(debugGuild) {
         this.commands.forEach(cmd => {
@@ -52,6 +45,7 @@ module.exports = class Client extends Discord.Client {
             registerCmd.create({
                 name: cmd.name,
                 description: cmd.description,
+                options: cmd.slashCommandOptions
             })
         })
     }

@@ -9,6 +9,7 @@
   "author": "Tyrone Serdan",
   "license": "ISC",
   "dependencies": {
+    "discord-player": "^5.1.0",
     "discord.js": "^13.1.0"
   }
 }
