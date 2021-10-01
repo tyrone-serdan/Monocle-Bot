@@ -17,9 +17,9 @@ module.exports = new Command({
     async run(interaction) {
         interaction.deferReply();
 
-        interaction.editReply({
-            content: "NOTE !! I have not tested the bot with playlists, message turon if something weird pops up."
-        })
+        // await interaction.editReply({
+        //     content: "NOTE !! I have not tested the bot with playlists, message turon if something weird pops up."
+        // })
 
         let song = interaction.options.get("song").value;
         

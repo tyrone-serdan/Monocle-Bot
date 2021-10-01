@@ -14,7 +14,7 @@ module.exports = new Command({
         const didSkip = queue.skip();
 
         interaction.reply({
-            content: `${(didSkip) ? `${queue.current.title} was skipped!` : `Something went wrong, sorry!`}`
+            content: `${(didSkip) ? `**${queue.current.title}** was skipped!` : `Something went wrong, sorry!`}`
         })
 
     }

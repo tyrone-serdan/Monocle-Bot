@@ -16,7 +16,7 @@ module.exports = new Command({
         }
     ],
     async run(interaction) {
-        const whatToLoop = interaction.options.get("loopWhat").value.toLowerCase();
+        const whatToLoop = interaction.options.get("loopwhat").value.toLowerCase();
         const queue = player.getQueue(interaction.guild.id);
 
         if (!queue || !queue.playing) return interaction.reply({content: "There isn't any music playing in the server.", ephemeral: true});
