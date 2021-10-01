@@ -7,7 +7,7 @@ const debugGuild = '767749277769662464';
 
 client.on('ready', () => {
     client.user.setActivity(`/help`,{type: 'LISTENING'});
-    client.setupSlash();
+    client.setupSlash(debugGuild);
 
     console.log(`${client.user.username} is now Ready!`);
 });
@@ -19,9 +19,9 @@ client.on('interactionCreate', async (interaction) => {
 
     try {
         command.run(interaction);
-    } catch {
+    } catch (error) {
         interaction.reply({
-            content:"something went wrong on our end, sorry!",
+            content:`sorry! something went wrong. please send this error message to turon.\n\`${error}\``,
             ephemeral: true
         });
     }

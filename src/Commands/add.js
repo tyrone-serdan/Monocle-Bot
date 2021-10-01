@@ -7,23 +7,29 @@ module.exports = new Command({
     description:"adds two numbers",
     slashCommandOptions: [
         {
-        name: "num1",
-        description:"First Number",
-        required: true,
-        type: commandTypes.NUMBER
+            name: "num1",
+            description:"First Number",
+            required: true,
+            type: commandTypes.NUMBER
         },
         {
             name: "num2",
             description:"Second Number",
             required: true,
             type: commandTypes.NUMBER
-        }  
+        }
     ],
     async run(interaction) {
-        const num1 = interaction.options.getNumber('num1');
-        const num2 = interaction.options.getNumber('num2');
-        interaction.reply({
-            content: String(num1 + num2)
+        const { options } = interaction;
+        const num1 = options.getNumber('num1');
+        const num2 = options.getNumber('num2');
+
+        await interaction.deferReply({
+            ephemeral: true
+        });
+
+        interaction.editReply({
+            content: `sum is ${num1 + num2}`
         })
     }
 })
