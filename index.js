@@ -4,10 +4,11 @@ const Client = require("./src/Structures/Client.js");
 const client = new Client();
 
 const debugGuild = '767749277769662464';
+globalThis.player = new Player(client);
 
-client.on('ready', () => {
+client.on('ready', async () => {
     client.user.setActivity(`/help`,{type: 'LISTENING'});
-    client.setupSlash(debugGuild);
+    await client.setupSlash(debugGuild);
 
     console.log(`${client.user.username} is now Ready!`);
 });

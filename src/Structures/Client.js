@@ -1,6 +1,7 @@
 const Command = require("./Command.js");
 const Discord = require("discord.js");
 const { readdirSync } = require("fs");
+const { debug } = require("console");
 
 const intents = new Discord.Intents(641);
 
@@ -27,7 +28,7 @@ module.exports = class Client extends Discord.Client {
                  * @type {Command}
                  */
                 const command = require(`../Commands/${cmd}`);
-                console.log(`setting up ${command.name}`);
+                console.log(`putting ${command.name.toUpperCase()} in client.commands`);
 
                 this.commands.set(command.name, command);
             })
@@ -36,12 +37,18 @@ module.exports = class Client extends Discord.Client {
      * @param {String} debugGuild if debugGuild has value, setup commands for that server only, else, make commands global.
      */
     setupSlash(debugGuild) {
+        let guild;
+        let registerCmd;
+
+        if (debugGuild) {
+            guild = this.guilds.cache.get(debugGuild);
+        }
+        
+        registerCmd = (guild) ? guild.commands : this.application?.commands;
+
         this.commands.forEach(cmd => {
-            const guild = this.guilds.cache.get(debugGuild);
-            const registerCmd = (guild) ? guild.commands : this.application?.commands;
 
-            console.log(`cmd name = ${cmd.name}.`);
-
+            console.log(`now registering command ${cmd.name.toUpperCase()}\nto guildID ${debugGuild}\n`);
             registerCmd.create({
                 name: cmd.name,
                 description: cmd.description,
