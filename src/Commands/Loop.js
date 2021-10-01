@@ -9,7 +9,7 @@ module.exports = new Command({
     description:"loops the current song or queue",
     slashCommandOptions: [
         {
-            name: "loopWhat",
+            name: "loopwhat",
             description: "chooses whether to loop a song, queue, or remove to remove the loop.",
             required: true,
             type: commandTypes.STRING
