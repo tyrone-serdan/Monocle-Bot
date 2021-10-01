@@ -23,7 +23,7 @@ module.exports = new Command({
             .setColor('RED')
             .setThumbnail(track.thumbnail)
             .setAuthor(track.title, client.user.displayAvatarURL({ size: 1024, dynamic: true }))
-            .setDescription(`Volume **${queue.volume}**%\nDuration **${trackDuration}**\nLoop mode **${methods[queue.repeatMode]}**\nRequested by ${track.requestedBy}`)
+            .setDescription(`Volume: **${queue.volume}**%\nDuration: **${trackDuration}**\nLoop mode **${methods[queue.repeatMode]}**\nRequested by: ${track.requestedBy}`)
             .setFooter('made by turon !!', message.author.avatarURL({ dynamic: true }))
             .setTimestamp();
         
