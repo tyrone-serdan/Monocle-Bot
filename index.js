@@ -6,6 +6,8 @@ const client = new Client();
 const debugGuild = '767749277769662464';
 globalThis.player = new Player(client);
 
+// * PLAYER EVENTS
+
 client.on('ready', async () => {
     client.user.setActivity(`/help`,{type: 'LISTENING'});
     await client.setupSlash(debugGuild);
@@ -17,7 +19,7 @@ client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
     
     const command = client.commands.find(cmd => cmd.name == interaction.commandName);
-
+    
     try {
         command.run(interaction);
     } catch (error) {
@@ -26,6 +28,22 @@ client.on('interactionCreate', async (interaction) => {
             ephemeral: true
         });
     }
+});
+
+
+// * PLAYER EVENTS
+
+player.on('error', async (queue, error) => {
+    if (error) {
+        queue.metadata.send(`Our music player crashed when playing the current song, skipping it!\n\`ERROR MSG : ${error.message}\``);
+    } else {
+        queue.metadata.send("Our music player has suddenly broke, we are skipping to the next song. Sorry about that!");
+    }
+    queue.skip();
+});
+
+player.on('trackStart', async (queue, track) => {
+    queue.metadata.send(`Now playing **${track.title}!**`);
 });
 
 client.start(token);

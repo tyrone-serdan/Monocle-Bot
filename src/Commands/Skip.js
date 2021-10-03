@@ -5,6 +5,7 @@ const commandTypes = Constants.ApplicationCommandOptionTypes;
 module.exports = new Command({
     name:"skip",
     description:"skips the current song playing",
+    example:"/skip",
     slashCommandOptions: [],
     async run(interaction) {
         const queue = player.getQueue(interaction.guild.id);

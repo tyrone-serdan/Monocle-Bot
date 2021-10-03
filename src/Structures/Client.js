@@ -1,7 +1,6 @@
 const Command = require("./Command.js");
 const Discord = require("discord.js");
 const { readdirSync } = require("fs");
-const { debug } = require("console");
 
 const intents = new Discord.Intents(641);
 
@@ -23,7 +22,6 @@ module.exports = class Client extends Discord.Client {
         readdirSync('./src/Commands')
             .filter(file => file.endsWith(".js"))
             .forEach(cmd => {
-
                 /**
                  * @type {Command}
                  */
@@ -33,6 +31,11 @@ module.exports = class Client extends Discord.Client {
                 this.commands.set(command.name, command);
             })
     }
+
+    getCommands() {
+        return this.commands;
+    }
+
     /**
      * @param {String} debugGuild if debugGuild has value, setup commands for that server only, else, make commands global.
      */

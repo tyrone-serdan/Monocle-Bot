@@ -6,17 +6,18 @@ const commandTypes = Constants.ApplicationCommandOptionTypes;
 
 module.exports = new Command({
     name:"loop",
-    description:"loops the current song or queue",
+    description:"loops the current track or queue",
+    example:"/loop track || /loop off",
     slashCommandOptions: [
         {
-            name: "loopwhat",
-            description: "chooses whether to loop a song, queue, or remove to remove the loop.",
+            name: "option",
+            description: "loop a **track**, **queue**, or turn it **off**.",
             required: true,
             type: commandTypes.STRING
         }
     ],
     async run(interaction) {
-        const whatToLoop = interaction.options.get("loopwhat").value.toLowerCase();
+        const whatToLoop = interaction.options.get("option").value.toLowerCase();
         const queue = player.getQueue(interaction.guild.id);
 
         if (!queue || !queue.playing) return interaction.reply({content: "There isn't any music playing in the server.", ephemeral: true});
@@ -34,7 +35,7 @@ module.exports = new Command({
                             break;
                         
                         case queueModes.QUEUE:
-                            interaction.reply({content: "I'm already looping the queue, use `/loop` off to turn it off!", ephemeral: true});
+                            interaction.reply({content: "I'm already looping the queue, use `/loop off` to turn it off!", ephemeral: true});
                     }
                 }
                 break;
@@ -51,7 +52,7 @@ module.exports = new Command({
                             break;
                         
                         case queueModes.TRACK:
-                            interaction.reply({content: "I'm already looping the song, use `/loop` off to turn it off!", ephemeral: true});
+                            interaction.reply({content: "I'm already looping the song, use `/loop off` to turn it off!", ephemeral: true});
                     }
                 }
                 break;
