@@ -1,4 +1,4 @@
-const Command = require("../Structures/Command.js");
+const Command = require("../../Structures/Command.js");
 const { Constants } = require("discord.js");
 const { QueueRepeatMode } = require("discord-player");
 const queueModes = QueueRepeatMode;

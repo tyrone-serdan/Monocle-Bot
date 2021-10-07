@@ -1,4 +1,4 @@
-const Command = require("../Structures/Command.js");
+const Command = require("../../Structures/Command.js");
 const { Constants } = require("discord.js");
 const { QueryType } = require("discord-player");
 const commandTypes = Constants.ApplicationCommandOptionTypes;
@@ -40,9 +40,15 @@ module.exports = new Command({
 
         const isPlaylist = songsFound.playlist ? true : false
 
-        await interaction.editReply(`Loading up the ${isPlaylist ? 'playlist' : 'track'} **${isPlaylist ? songsFound.playlist.title : songsFound.tracks[0].title}**`);
-
-        songsFound.playlist ? queue.addTrack(songsFound.tracks) : queue.addTrack(songsFound.tracks[0]);
+        await interaction.editReply(`Loading up the ${(isPlaylist) ? 'playlist' : 'track'} **${isPlaylist ? songsFound.playlist.title : songsFound.tracks[0].title}**`);
+        
+        try {
+            (isPlaylist) ? queue.addTrack(songsFound.tracks) : queue.addTrack(songsFound.tracks[0]); 
+        } catch (error) {
+            queue.destroy(true);
+            player.deleteQueue(interaction.guild.id);
+            return interaction.editReply(`There seems to be an error adding your ${isPlaylist ? 'playlist' : 'track'}\n\`\`\`ERROR: \n${error}\`\`\``)
+        }
 
         if (!queue.playing) {
             await queue.play();

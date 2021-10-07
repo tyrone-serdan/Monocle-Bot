@@ -1,4 +1,4 @@
-const Command = require("../Structures/Command.js");
+const Command = require("../../Structures/Command.js");
 const { Constants } = require("discord.js");
 // const { MessageEmbed } = require("discord.js");
 const commandTypes = Constants.ApplicationCommandOptionTypes;

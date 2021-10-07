@@ -5,6 +5,7 @@ const client = new Client();
 
 const debugGuild = '767749277769662464';
 globalThis.player = new Player(client);
+globalThis.clientCMDs = client.commands;
 
 // * PLAYER EVENTS
 

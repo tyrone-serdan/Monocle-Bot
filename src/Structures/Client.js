@@ -19,21 +19,21 @@ module.exports = class Client extends Discord.Client {
     start(token) {
         this.login(token);
 
+
         readdirSync('./src/Commands')
-            .filter(file => file.endsWith(".js"))
-            .forEach(cmd => {
-                /**
-                 * @type {Command}
-                 */
-                const command = require(`../Commands/${cmd}`);
-                console.log(`putting ${command.name.toUpperCase()} in client.commands`);
+            .forEach(folder => {
+                readdirSync(`./src/Commands/${folder}`)
+                    .filter(file => file.endsWith(".js"))
+                    .forEach(cmd => {
+                        /**
+                         * @type {Command}
+                         */
+                        const command = require(`../Commands/${folder}/${cmd}`);
+                        console.log(`putting ${command.name.toUpperCase()} from ${folder} in client.commands\n`);
 
-                this.commands.set(command.name, command);
+                        this.commands.set(command.name, command);
+                    })
             })
-    }
-
-    getCommands() {
-        return this.commands;
     }
 
     /**
@@ -51,7 +51,7 @@ module.exports = class Client extends Discord.Client {
 
         this.commands.forEach(cmd => {
 
-            console.log(`now registering command ${cmd.name.toUpperCase()}\nto guildID ${debugGuild}\n`);
+            console.log(`now registering command ${cmd.name.toUpperCase()} to guildID ${debugGuild}\n`);
             registerCmd.create({
                 name: cmd.name,
                 description: cmd.description,

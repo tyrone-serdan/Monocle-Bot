@@ -1,4 +1,4 @@
-const Command = require("../Structures/Command.js");
+const Command = require("../../Structures/Command.js");
 const { Constants } = require("discord.js");
 const { MessageEmbed } = require("discord.js");
 const commandTypes = Constants.ApplicationCommandOptionTypes;
@@ -19,7 +19,7 @@ module.exports = new Command({
     async run(interaction) {
         const cmdRequested = (interaction.options.getString("command")) ? interaction.options.getString("command").toLowerCase() : null;
         const embed = new MessageEmbed();
-        const Commands = interaction.client.getCommands();
+        const Commands = clientCMDs;
 
         let ListOfCMDs = new String();
 
