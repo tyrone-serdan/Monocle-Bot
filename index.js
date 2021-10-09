@@ -7,6 +7,11 @@ const debugGuild = '767749277769662464';
 globalThis.player = new Player(client);
 globalThis.clientCMDs = client.commands;
 
+
+process.on('unhandledRejection', (err) => {
+    console.log(`I think an error happened\nERROR: ${err}`)
+})
+
 // * PLAYER EVENTS
 
 client.on('ready', async () => {

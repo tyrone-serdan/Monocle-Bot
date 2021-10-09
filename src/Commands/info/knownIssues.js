@@ -6,6 +6,7 @@ const commandTypes = Constants.ApplicationCommandOptionTypes;
 module.exports = new Command({
     name:"knownissues",
     description:"shows a list of known issues with the bot.",
+    example:"/knownissues",
     slashCommandOptions: [],
     async run(interaction) {
         const embed = new MessageEmbed();

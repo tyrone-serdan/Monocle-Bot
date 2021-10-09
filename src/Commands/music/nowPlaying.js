@@ -9,6 +9,7 @@ module.exports = new Command({
     example:"/nowplaying",
     slashCommandOptions: [],
     async run(interaction) {
+        const noImageURL = "https://external-preview.redd.it/9HZBYcvaOEnh4tOp5EqgcCr_vKH7cjFJwkvw-45Dfjs.png?auto=webp&s=ade9b43592942905a45d04dbc5065badb5aa3483";
         const embed = new MessageEmbed();
         const queue = player.getQueue(interaction.guild.id);
 
@@ -19,13 +20,15 @@ module.exports = new Command({
 
         if (!queue || !queue.playing) return interaction.reply({content:"There is no music playing!", ephemeral: true});
 
-        // .setDescription(`Volume: **${queue.volume}**%\nDuration: **${trackDuration}**\nLoop mode **${methods[queue.repeatMode]}**\nRequested by: ${track.requestedBy}`)
+        const url = track.url ? track.url : null;
+        const img = track.thumbnail ? track.thumbnail : noImageURL;
+        
         embed
             .setColor('RED')
-            .setImage(track.thumbnail)
+            .setImage(img)
+            .setURL(url)
             .setAuthor("Now Playing...", interaction.client.user.displayAvatarURL({ size: 1024, dynamic: true }))
             .setTitle(`${track.title} by ${track.author}`)
-            .setURL(track.url)
             .addFields(
                 {name: "Current Volume", value: `${queue.volume}%`},
                 {name: "Duration", value: trackDuration},

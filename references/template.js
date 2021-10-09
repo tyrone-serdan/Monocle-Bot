@@ -6,6 +6,7 @@ const commandTypes = Constants.ApplicationCommandOptionTypes;
 module.exports = new Command({
     name:"",
     description:"",
+    example:"",
     slashCommandOptions: [],
     async run(interaction) {
         // const embed = new MessageEmbed();

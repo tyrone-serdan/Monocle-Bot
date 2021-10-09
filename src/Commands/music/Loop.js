@@ -11,9 +11,9 @@ module.exports = new Command({
     slashCommandOptions: [
         {
             name: "option",
-            description: "loop a **track**, **queue**, or turn it **off**.",
+            description: "loop a TRACK, QUEUE, or turn it OFF.",
             required: true,
-            type: commandTypes.STRING
+            type: commandTypes.STRING,
         }
     ],
     async run(interaction) {

@@ -28,16 +28,20 @@ module.exports = new Command({
 
             if (Commands.has(cmdRequested)) {
                 command = Commands.find(cmd => cmd.name == cmdRequested);
+
+                embed
+                    .setAuthor(interaction.client.user.username, interaction.client.user.avatarURL())
+                    .setColor('RED')
+                    .setTitle(`${command.name.toUpperCase()}`)
+                    .setDescription(`${command.description}\n\`${command.example}\``)
+                    .setTimestamp()
+                    .setFooter(`made by turon !!`)
+            } else {
+                interaction.reply({
+                    content: `The command ${cmdRequested} is not a valid command`,
+                    ephemeral: true,
+                })
             }
-
-            embed
-                .setAuthor(interaction.client.user.username, interaction.client.user.avatarURL())
-                .setColor('RED')
-                .setTitle(`${command.name.toUpperCase()}`)
-                .setDescription(`${command.description}\n\`${command.example}\``)
-                .setTimestamp()
-                .setFooter(`made by turon !!`)
-
             return interaction.reply({
                 embeds: [embed],
                 ephemeral: true
