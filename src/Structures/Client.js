@@ -4,6 +4,24 @@ const { readdirSync } = require("fs");
 
 const intents = new Discord.Intents(641);
 
+/**
+ * registerCommands to the given guildID, if guildID = null, register globally.
+ * @param {Discord.GuildApplicationCommandManager} registerCommands
+ * @param {Discord.Collection<String, Command>} commands 
+ * @param {String} guildID
+ */
+function registerCommands(commands, registerCommands, guildID) {
+    commands.forEach(cmd => {
+        
+        console.log(`now registering command ${cmd.name.toUpperCase()} to ${guildID}\n`);
+        registerCommands.create({
+            name: cmd.name,
+            description: cmd.description,
+            options: cmd.slashCommandOptions
+        })
+    })
+}
+
 module.exports = class Client extends Discord.Client {
     constructor() {
         super({ intents });
@@ -37,27 +55,24 @@ module.exports = class Client extends Discord.Client {
     }
 
     /**
-     * @param {String} debugGuild if debugGuild has value, setup commands for that server only, else, make commands global.
+     * @param {String[]} debugGuild if debugGuild has value, setup commands for that server only, else, make commands global.
      */
     setupSlash(debugGuild) {
         let guild;
-        let registerCmd;
-
+        let regCommands;
+        // this.application?.commands;
         if (debugGuild) {
-            guild = this.guilds.cache.get(debugGuild);
-        }
-        
-        registerCmd = (guild) ? guild.commands : this.application?.commands;
-
-        this.commands.forEach(cmd => {
-
-            console.log(`now registering command ${cmd.name.toUpperCase()} to guildID ${debugGuild}\n`);
-            registerCmd.create({
-                name: cmd.name,
-                description: cmd.description,
-                options: cmd.slashCommandOptions
+            debugGuild.forEach(dguild => {
+                guild = this.guilds.cache.get(dguild);
+                regCommands = guild.commands;
+                
+                registerCommands(this.commands, regCommands, guild);
             })
-        })
+        } else {
+            regCommands = this.application.commands;
+            
+            registerCommands(this.commands, regCommands, "GLOBAL");
+        }
     }
 }
 

@@ -3,7 +3,7 @@ const { Player } = require("discord-player");
 const Client = require("./src/Structures/Client.js");
 const client = new Client();
 
-const debugGuild = '767749277769662464';
+const debugGuilds = ['767749277769662464','761548183019978754'];
 globalThis.player = new Player(client);
 globalThis.clientCMDs = client.commands;
 
@@ -16,7 +16,7 @@ process.on('unhandledRejection', (err) => {
 
 client.on('ready', async () => {
     client.user.setActivity(`/help`,{type: 'LISTENING'});
-    await client.setupSlash(debugGuild);
+    await client.setupSlash(debugGuilds);
 
     console.log(`${client.user.username} is now Ready!`);
 });

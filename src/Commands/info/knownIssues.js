@@ -15,8 +15,9 @@ module.exports = new Command({
             .setAuthor(`I promise i'll work on them soon`, interaction.client.user.avatarURL())
             .setTitle(`Known Issues with ${interaction.client.user.username}`)
             .setDescription(
-                `Playlists dont seem to get added to bot **FIX OTW**\n
+                `\n
                 Bot may randomly crash mid-song **UNSURE IF FIX WORKS**\n
+                The thing i'm using to get audio \`ytdl-core\` seems buggy, songs might not play, so be careful. **I'M LAZY SO I FIX LATER**\n
                 `
             )
             .setColor('RED')
