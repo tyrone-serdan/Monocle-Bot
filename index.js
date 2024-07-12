@@ -3,7 +3,7 @@ const { Player } = require("discord-player");
 const Client = require("./src/Structures/Client.js");
 const client = new Client();
 
-const debugGuilds = ['767749277769662464','761548183019978754'];
+// const debugGuilds = [random guild ids here]
 globalThis.player = new Player(client);
 globalThis.clientCMDs = client.commands;
 
