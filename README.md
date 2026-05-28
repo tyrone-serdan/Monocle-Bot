@@ -2,7 +2,7 @@
 
 A Discord music bot built with **discord.js v13** and **discord-player v5** that plays music from **YouTube**, **SoundCloud**, and **Spotify**.
 
-Created by [tyrone-serdan](https://github.com/tyrone-serdan) (turon#3413).
+Created by [tyrone](https://github.com/tyrone-serdan)
 
 ---
 
